@@ -7,9 +7,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Pacifico&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=Cursive" rel="stylesheet">
     <style>
-        /* BASE STYLES */
         body {
             margin: 0;
             padding: 0;
@@ -21,7 +20,7 @@
             min-height: 100vh;
             background-color: #F8F4F0;
             overflow: hidden;
-            cursor: none; 
+            cursor: none; /* Menyembunyikan kursor mouse bawaan */
         }
 
         .container {
@@ -29,33 +28,13 @@
             width: 100%;
             height: 100vh;
             display: flex;
-            flex-direction: column; /* Menggunakan flex-direction: column agar konten tidak berjejer ke samping */
             justify-content: center;
             align-items: center;
             background-color: #D34C4C;
             transition: opacity 1s ease-in-out;
             overflow: hidden;
         }
-
-        /* Large Heart Background */
-        .large-heart-bg {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0); 
-            color: rgba(255, 255, 255, 0.1); 
-            font-size: 800px; 
-            z-index: -1; 
-            animation: pulseAndRotate 20s infinite ease-in-out;
-        }
-
-        @keyframes pulseAndRotate {
-            0% { transform: translate(-50%, -50%) scale(0.9) rotate(0deg); }
-            50% { transform: translate(-50%, -50%) scale(1) rotate(10deg); }
-            100% { transform: translate(-50%, -50%) scale(0.9) rotate(0deg); }
-        }
-
-        /* Small Heart Particles */
+        
         .hearts-background {
             position: absolute;
             top: 0;
@@ -85,14 +64,14 @@
             }
         }
 
-        /* Mouse Aura */
+        /* Gaya baru untuk aura mouse */
         .mouse-aura {
             position: absolute;
-            color: #ffcccc; 
+            color: #ffcccc; /* Warna pink muda untuk aura */
             font-size: 25px;
             pointer-events: none;
             opacity: 0;
-            transform: translate(-50%, -50%); 
+            transform: translate(-50%, -50%); /* Memposisikan di tengah kursor */
             animation: fadeAndShrink 1s forwards;
             z-index: 100;
         }
@@ -102,7 +81,7 @@
             100% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
         }
 
-        /* Page & Content */
+
         .page {
             position: absolute;
             width: 100%;
@@ -130,10 +109,8 @@
             margin: 0;
             animation: fadeIn 1s ease-out forwards;
         }
-        
-        /* Menggunakan unit relatif untuk ukuran font */
+
         .intro-text, .message-text, .question-text, .result-text {
-            font-size: 6rem;
             animation: fadeIn 1s ease-out forwards;
             animation-delay: 0.5s;
         }
@@ -458,144 +435,91 @@
             50% { transform: scale(0.95); }
             100% { transform: scale(1); }
         }
-
-        /*
-        =========================================================
-        MEDIA QUERIES FOR RESPONSIVE DESIGN
-        =========================================================
-        */
-        @media (max-width: 768px) {
+        
+        /* --- Media Queries untuk Layar HP (maks 600px) --- */
+        @media (max-width: 600px) {
             body {
-                cursor: auto; 
+                overflow-x: hidden;
+                cursor: default;
             }
-            
-            /* Mengatur ulang layout container menjadi vertikal di ponsel */
-            .container {
-                flex-direction: column;
-                justify-content: flex-start; /* Mulai dari atas */
-                padding: 20px;
-                box-sizing: border-box;
+
+            .hearts-background {
+                display: none;
             }
 
             h1 {
-                font-size: 3.5rem; 
-                margin-bottom: 20px;
+                font-size: 3rem;
+                margin-top: 10vh;
             }
-
-            .page {
-                justify-content: flex-start;
-                padding-top: 50px;
-                box-sizing: border-box;
-            }
-
-            .page.visible {
-                padding-top: 50px;
-                height: auto;
+            
+            .button {
+                padding: 10px 20px;
+                font-size: 1rem;
             }
 
             .envelope-container {
-                position: relative;
                 width: 90%;
-                max-width: 400px; /* Batas lebar amplop */
                 height: auto;
-                bottom: auto;
-                right: auto;
-                transform: rotate(0deg); 
+                position: static;
+                transform: none;
+                margin-top: 30px;
+                animation: none;
             }
 
             .envelope {
-                width: 100%;
-                height: 250px;
-                margin-top: 20px;
+                border-width: 2px;
+                box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
             }
 
-            .paper, #question-page .paper, #result-page-sudah .paper {
-                position: relative;
+            .paper, #question-page .paper-container, #result-page-sudah .paper, #result-page-belum .paper {
                 width: 90%;
-                max-width: 400px;
-                height: 300px;
-                top: auto;
-                left: auto;
-                transform: rotate(0deg);
-                margin: 20px 0;
+                height: auto;
+                transform: none !important;
             }
             
-            .paper-message {
-                padding: 10px;
-            }
-
             .paper-message h2 {
-                font-size: 1.8rem;
-            }
-
-            .paper-message p {
                 font-size: 1.5rem;
             }
             
-            .paper-message span.heart, #result-page-sudah .paper-message .heart {
-                font-size: 2.5rem;
-            }
-
-            .button {
-                padding: 12px 24px;
-                font-size: 1rem;
+            .paper-message p {
+                font-size: 1.2rem;
             }
 
             .question-buttons {
                 flex-direction: column;
                 margin-left: 0;
-                gap: 15px;
+                align-items: center;
+                margin-top: 20px;
             }
 
             .question-buttons .button {
-                padding: 15px 40px;
                 font-size: 1.2rem;
+                padding: 15px 40px;
             }
             
-            #result-page-sudah .paper {
-                height: auto;
-                padding: 20px 0;
-            }
-            
-            #result-page-sudah .paper-message {
-                justify-content: center;
-                text-align: center;
-                position: relative;
-            }
-
-            #result-page-sudah .paper-message p {
-                text-align: center;
-            }
-
             #final-page {
                 flex-direction: column;
-                justify-content: center;
-                gap: 20px;
-                padding-top: 50px;
+                padding-left: 0;
             }
 
             #final-page .text-container {
-                text-align: center;
                 padding-left: 0;
+                text-align: center;
+                order: 2;
             }
             
             #final-page .text-container p {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
 
             #final-page .envelope-container {
-                display: none; 
-            }
-            
-            .large-heart-bg {
-                font-size: 400px; 
+                order: 1;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="large-heart-bg">❤️</div>
         <div class="hearts-background"></div> 
         
         <div id="intro-page" class="page visible">
@@ -677,7 +601,7 @@
                 <div class="paper-lines"></div>
                 <div class="paper-message">
                     <p>Ihh bau kamu kecut bangettt</p>
-                    <h2 style="font-size: 2.5rem;">MANDI SANAA</h2>
+                    <h2 style="font-size: 3rem;">MANDI SANAA</h2>
                 </div>
             </div>
         </div>
@@ -763,6 +687,7 @@
             }, 300);
         });
 
+        // --- Fungsi untuk Partikel Hati yang Bergerak di Background ---
         function createHeartParticles() {
             const heartsBackground = document.querySelector('.hearts-background');
             const numberOfHearts = 80; 
@@ -802,23 +727,23 @@
             }
         }
 
+        // --- Fungsi untuk Aura Hati yang Mengikuti Mouse ---
         document.addEventListener('mousemove', (e) => {
-            if (window.innerWidth > 768) { 
-                const aura = document.createElement('span');
-                aura.classList.add('mouse-aura');
-                
-                const characters = ['❤️', '💖', '✨', '🌟'];
-                aura.innerHTML = characters[Math.floor(Math.random() * characters.length)]; 
-                
-                aura.style.left = e.clientX + 'px';
-                aura.style.top = e.clientY + 'px';
-                
-                document.body.appendChild(aura);
-                
-                aura.addEventListener('animationend', () => {
-                    aura.remove();
-                });
-            }
+            const aura = document.createElement('span');
+            aura.classList.add('mouse-aura');
+            
+            const characters = ['❤️', '💖', '✨', '🌟'];
+            aura.innerHTML = characters[Math.floor(Math.random() * characters.length)]; 
+            
+            aura.style.left = e.clientX + 'px';
+            aura.style.top = e.clientY + 'px';
+            
+            document.body.appendChild(aura);
+            
+            // Hapus partikel setelah animasinya selesai
+            aura.addEventListener('animationend', () => {
+                aura.remove();
+            });
         });
     </script>
 </body>
