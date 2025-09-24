@@ -29,6 +29,7 @@
             width: 100%;
             height: 100vh;
             display: flex;
+            flex-direction: column; /* Menggunakan flex-direction: column agar konten tidak berjejer ke samping */
             justify-content: center;
             align-items: center;
             background-color: #D34C4C;
@@ -129,8 +130,10 @@
             margin: 0;
             animation: fadeIn 1s ease-out forwards;
         }
-
+        
+        /* Menggunakan unit relatif untuk ukuran font */
         .intro-text, .message-text, .question-text, .result-text {
+            font-size: 6rem;
             animation: fadeIn 1s ease-out forwards;
             animation-delay: 0.5s;
         }
@@ -463,36 +466,62 @@
         */
         @media (max-width: 768px) {
             body {
-                cursor: auto; /* Tampilkan kembali kursor di ponsel */
+                cursor: auto; 
+            }
+            
+            /* Mengatur ulang layout container menjadi vertikal di ponsel */
+            .container {
+                flex-direction: column;
+                justify-content: flex-start; /* Mulai dari atas */
+                padding: 20px;
+                box-sizing: border-box;
             }
 
             h1 {
-                font-size: 3.5rem; /* Perkecil ukuran font judul */
+                font-size: 3.5rem; 
+                margin-bottom: 20px;
+            }
+
+            .page {
+                justify-content: flex-start;
+                padding-top: 50px;
+                box-sizing: border-box;
+            }
+
+            .page.visible {
+                padding-top: 50px;
+                height: auto;
             }
 
             .envelope-container {
-                position: relative; /* Atur posisi ke relatif */
+                position: relative;
                 width: 90%;
+                max-width: 400px; /* Batas lebar amplop */
                 height: auto;
                 bottom: auto;
                 right: auto;
-                transform: rotate(0deg); /* Hapus rotasi amplop */
+                transform: rotate(0deg); 
             }
-            
+
             .envelope {
                 width: 100%;
                 height: 250px;
                 margin-top: 20px;
             }
 
-            .paper, #question-page .paper {
+            .paper, #question-page .paper, #result-page-sudah .paper {
                 position: relative;
                 width: 90%;
+                max-width: 400px;
                 height: 300px;
                 top: auto;
                 left: auto;
                 transform: rotate(0deg);
-                margin-top: 20px;
+                margin: 20px 0;
+            }
+            
+            .paper-message {
+                padding: 10px;
             }
 
             .paper-message h2 {
@@ -522,14 +551,16 @@
                 padding: 15px 40px;
                 font-size: 1.2rem;
             }
-
+            
             #result-page-sudah .paper {
-                width: 90%;
+                height: auto;
+                padding: 20px 0;
             }
             
             #result-page-sudah .paper-message {
                 justify-content: center;
                 text-align: center;
+                position: relative;
             }
 
             #result-page-sudah .paper-message p {
@@ -549,15 +580,15 @@
             }
             
             #final-page .text-container p {
-                font-size: 2.5rem;
+                font-size: 2rem;
             }
 
             #final-page .envelope-container {
-                display: none; /* Sembunyikan amplop di halaman terakhir untuk ponsel */
+                display: none; 
             }
             
             .large-heart-bg {
-                font-size: 400px; /* Perkecil ukuran hati besar di ponsel */
+                font-size: 400px; 
             }
         }
     </style>
@@ -565,7 +596,6 @@
 <body>
     <div class="container">
         <div class="large-heart-bg">❤️</div>
-        
         <div class="hearts-background"></div> 
         
         <div id="intro-page" class="page visible">
@@ -773,7 +803,7 @@
         }
 
         document.addEventListener('mousemove', (e) => {
-            if (window.innerWidth > 768) { // Nonaktifkan aura mouse di perangkat mobile
+            if (window.innerWidth > 768) { 
                 const aura = document.createElement('span');
                 aura.classList.add('mouse-aura');
                 
@@ -790,7 +820,6 @@
                 });
             }
         });
-
     </script>
 </body>
 </html>
